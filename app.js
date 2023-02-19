@@ -5,7 +5,10 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 const app = express()
 app.use(cors())
 app.use(createProxyMiddleware({
-  router: (req) => new URL(req.path.substring(1)),
+  router: (req) => {
+    console.log(`serving ${req.url.substring(1)}`);
+    return new URL(req.path.substring(1))
+  },
   pathRewrite: (path, req) => (new URL(req.url.substring(1))).href,
   changeOrigin: true,
   logger: console
