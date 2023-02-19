@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <textarea id="output" rows="20" cols="120"></textarea>
+
+  <script type="module">
+    const outputNode = document.getElementById('output')
+    const TARGET_URL = 'https://5th-ward-calendar.vercel.app/api/calendars?calendars=dallin.caltest%40gmail.com,dallin.caltest1%40gmail.com'
+    // const URL = TARGET_URL
+    const URL = `http://localhost:8088/${TARGET_URL}`
+    console.log(URL);
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => outputNode.textContent = JSON.stringify(data, null, 2))
+      .catch((exception) => {
+        outputNode.textContent = exception
+      })
+  </script>
+</body>
+</html>
